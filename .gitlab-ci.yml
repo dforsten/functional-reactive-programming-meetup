@@ -1,9 +1,9 @@
 test:
-  variables:
-    GIT_SUBMODULE_STRATEGY: recursive
   script:
+  # Todo: Figure out how to run these commands without SSL errors in the Runner
+  #- git submodule update --init --recursive
+  #- mkdir build
   - cd boost && ./bootstrap.sh
   - cd boost && ./b2 address-model=64
-  - mkdir build
   - cd build && cmake -DBOOST_ROOT=$PWD/../boost ..
   - cd build && cmake --build .
