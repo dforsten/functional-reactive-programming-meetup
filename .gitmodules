@@ -1,0 +1,6 @@
+[submodule "boost"]
+	path = boost
+	url = https://github.com/boostorg/boost
+[submodule "sodium"]
+	path = sodium
+	url = https://github.com/SodiumFRP/sodium-cxx.git
