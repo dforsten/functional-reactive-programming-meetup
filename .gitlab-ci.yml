@@ -1,6 +1,7 @@
 test:
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
   script:
-  - git submodule init
   - cd boost && ./bootstrap.sh
   - cd boost && ./b2 address-model=64
   - mkdir build
