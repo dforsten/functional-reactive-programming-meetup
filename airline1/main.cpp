@@ -9,13 +9,47 @@
 #include <QShortcut>
 #include <QPushButton>
 #include <QHBoxLayout>
+#include <QLabel>
 #include <qlogging.h>
 
 #include <sodium/sodium.h>
+#include <sodium/unit.h>
+using namespace sodium;
+using namespace std;
 
 #ifdef _WIN32
 #include <Windows.h>
 #endif
+
+class SLabel : public QLabel
+{
+public:
+    explicit SLabel(cell<QString> text_in, QWidget *parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags()) : QLabel(text_in.sample(), parent, f),
+        text(text_in)
+    {
+        text.listen([this](const QString& s) { this->setText(s); });
+    }
+
+    cell<QString> text;
+};
+
+class SButton : public QPushButton
+{
+public:
+    explicit SButton(const QString &text, QWidget *parent = Q_NULLPTR) : QPushButton(text, parent)
+    {
+        connect(this, &QPushButton::clicked, this, &SButton::on_clicked);
+    }
+
+    public slots:
+    void on_clicked()
+    {
+        sClicked.send(unit());
+    }
+
+    stream_sink<unit> sClicked;
+};
+
 
 class MainWindow : public QMainWindow
 {
@@ -25,19 +59,24 @@ public:
     {
         setWindowTitle("Sodium Example: airline1");
         QHBoxLayout *hLayout = new QHBoxLayout;
-        QPushButton *b1 = new QPushButton("A");
-        QPushButton *b2 = new QPushButton("B");
-        QPushButton *b3 = new QPushButton("C");
+
+        ///////////////////////////////////////////////////////////////////////
+        // Sodium Setup
+
+        SButton *b1 = new SButton("A");
+        cell<QString> mapped_button = b1->sClicked.map([](const unit& u) { return QString("Test"); }).hold("A");
+        SLabel* l1 = new SLabel(mapped_button);
+
+        ///////////////////////////////////////////////////////////////////////
+
         hLayout->addWidget(b1);
-        hLayout->addWidget(b2);
-        hLayout->addWidget(b3);
+        hLayout->addWidget(l1);
         
         QVBoxLayout *mainLayout = new QVBoxLayout;
         mainLayout->addLayout(hLayout);
         
         QWidget *w = new QWidget();
         w->setLayout(mainLayout);
-
         setCentralWidget(w);
 
         QSettings settings("davidf", "airline1");
