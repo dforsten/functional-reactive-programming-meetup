@@ -8,13 +8,19 @@ file(GLOB swidgets_SRC
     "sodium-qt/swidgets/*.cpp"
 )
 
-add_executable(simple_hold ${simple_hold_SRC} ${swidgets_SRC})
+file(GLOB common_SRC
+    "sodium-qt/examples/common/*.h"
+    "sodium-qt/examples/common/*.cpp"
+)
 
-include_directories(sodium boost sodium-qt/swidgets)
+add_executable(simple_hold ${simple_hold_SRC} ${swidgets_SRC} ${common_SRC})
+
+include_directories(sodium boost sodium-qt/swidgets sodium-qt/examples/common)
 
 add_definitions(-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}")
 
 source_group(swidgets FILES ${swidgets_SRC})
+source_group(common FILES ${common_SRC})
 
 find_package(Qt5Core)
 find_package(Qt5Gui)
