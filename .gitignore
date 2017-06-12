@@ -10,3 +10,7 @@ airline1\.dir/Debug/
 libsodium\.dir/Debug/
 
 sodium\.dir/Debug/
+
+\.DS_Store
+
+CMakeLists\.txt\.user

@@ -7,6 +7,8 @@
 #include <QSettings>
 #include <QKeyEvent>
 #include <QShortcut>
+#include <QPushButton>
+#include <QHBoxLayout>
 #include <qlogging.h>
 
 #ifdef _WIN32
@@ -20,13 +22,21 @@ public:
     MainWindow()
     {
         setWindowTitle("Sodium Example: airline1");
+        QHBoxLayout *hLayout = new QHBoxLayout;
+        QPushButton *b1 = new QPushButton("A");
+        QPushButton *b2 = new QPushButton("B");
+        QPushButton *b3 = new QPushButton("C");
+        hLayout->addWidget(b1);
+        hLayout->addWidget(b2);
+        hLayout->addWidget(b3);
+        
+        QVBoxLayout *mainLayout = new QVBoxLayout;
+        mainLayout->addLayout(hLayout);
+        
+        QWidget *w = new QWidget();
+        w->setLayout(mainLayout);
 
-        // window.setFormat(format);
-        // window.resize(640, 480);
-        // window.setAnimating(true);
-
-        // QWidget *container = QWidget::createWindowContainer(&window, this);
-        // setCentralWidget(container);
+        setCentralWidget(w);
 
         QSettings settings("davidf", "airline1");
         settings.beginGroup("MainWindow");
