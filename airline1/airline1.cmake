@@ -5,6 +5,8 @@ file(GLOB airline1_SRC
 
 add_executable(airline1 ${airline1_SRC})
 
+include_directories(sodium boost)
+
 add_definitions(-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}")
 
 source_group(swidgets FILES ${swidgets_SRC})

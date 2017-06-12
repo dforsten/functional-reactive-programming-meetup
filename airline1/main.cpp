@@ -11,6 +11,8 @@
 #include <QHBoxLayout>
 #include <qlogging.h>
 
+#include <sodium/sodium.h>
+
 #ifdef _WIN32
 #include <Windows.h>
 #endif
