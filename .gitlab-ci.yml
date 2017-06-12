@@ -11,6 +11,6 @@ test:
   - cd build
   # windows:
   # cmake -DBOOST_ROOT=%CD%/../boost -DCMAKE_PREFIX_PATH=Q:\qt_official\5.9\msvc2017_64 -G "Visual Studio 15 2017 Win64" ..  
-  - cmake -DBOOST_ROOT=$PWD/../boost ..
+  - cmake -DBOOST_ROOT=$PWD/../boost -DCMAKE_PREFIX_PATH=/Users/davidf/Qt/5.9/clang_64 ..
   - cmake --build .
 
