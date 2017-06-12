@@ -6,5 +6,5 @@ set(CMAKE_AUTOMOC ON)
 
 add_subdirectory(sodium ${CMAKE_BINARY_DIR}_sodium)
 
-#include(simple_test/simple_test.cmake)
-#include(simple_qt_app/simple_qt_app.cmake)
+include(airline1/airline1.cmake)
+

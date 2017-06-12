@@ -2,3 +2,11 @@
 build/
 build_sodium/
 CMakeFiles/
+
+x64/
+
+airline1\.dir/Debug/
+
+libsodium\.dir/Debug/
+
+sodium\.dir/Debug/
