@@ -3,9 +3,14 @@ file(GLOB airline1_SRC
     "airline1/*.cpp"
 )
 
-add_executable(airline1 ${airline1_SRC})
+file(GLOB swidgets_SRC
+    "swidgets/*.h"
+    "swidgets/*.cpp"
+)
 
-include_directories(sodium boost)
+add_executable(airline1 ${airline1_SRC} ${swidgets_SRC})
+
+include_directories(sodium boost swidgets)
 
 add_definitions(-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}")
 

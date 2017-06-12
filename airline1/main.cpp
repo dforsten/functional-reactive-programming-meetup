@@ -7,49 +7,18 @@
 #include <QSettings>
 #include <QKeyEvent>
 #include <QShortcut>
-#include <QPushButton>
 #include <QHBoxLayout>
-#include <QLabel>
 #include <qlogging.h>
-
-#include <sodium/sodium.h>
-#include <sodium/unit.h>
-using namespace sodium;
-using namespace std;
 
 #ifdef _WIN32
 #include <Windows.h>
 #endif
 
-class SLabel : public QLabel
-{
-public:
-    explicit SLabel(cell<QString> text_in, QWidget *parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags()) : QLabel(text_in.sample(), parent, f),
-        text(text_in)
-    {
-        text.listen([this](const QString& s) { this->setText(s); });
-    }
+#include "SLabel.h"
+#include "SButton.h"
 
-    cell<QString> text;
-};
-
-class SButton : public QPushButton
-{
-public:
-    explicit SButton(const QString &text, QWidget *parent = Q_NULLPTR) : QPushButton(text, parent)
-    {
-        connect(this, &QPushButton::clicked, this, &SButton::on_clicked);
-    }
-
-    public slots:
-    void on_clicked()
-    {
-        sClicked.send(unit());
-    }
-
-    stream_sink<unit> sClicked;
-};
-
+using namespace sodium;
+using namespace std;
 
 class MainWindow : public QMainWindow
 {
@@ -58,7 +27,6 @@ public:
     MainWindow()
     {
         setWindowTitle("Sodium Example: airline1");
-        QHBoxLayout *hLayout = new QHBoxLayout;
 
         ///////////////////////////////////////////////////////////////////////
         // Sodium Setup
@@ -69,6 +37,7 @@ public:
 
         ///////////////////////////////////////////////////////////////////////
 
+        QHBoxLayout *hLayout = new QHBoxLayout;
         hLayout->addWidget(b1);
         hLayout->addWidget(l1);
         
