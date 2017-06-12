@@ -1,16 +1,16 @@
 file(GLOB simple_hold_SRC
-    "simple_hold/*.h"
-    "simple_hold/*.cpp"
+    "sodium-qt/examples/simple_hold/*.h"
+    "sodium-qt/examples/simple_hold/*.cpp"
 )
 
 file(GLOB swidgets_SRC
-    "swidgets/*.h"
-    "swidgets/*.cpp"
+    "sodium-qt/swidgets/*.h"
+    "sodium-qt/swidgets/*.cpp"
 )
 
 add_executable(simple_hold ${simple_hold_SRC} ${swidgets_SRC})
 
-include_directories(sodium boost swidgets)
+include_directories(sodium boost sodium-qt/swidgets)
 
 add_definitions(-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}")
 
