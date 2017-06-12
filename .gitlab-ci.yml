@@ -6,6 +6,8 @@ test:
   - cd boost
   - ./bootstrap.sh
   - ./b2 address-model=64
-  - cd ../build 
+  - cd ..
+  - mkdir build
+  - cd build
   - cmake -DBOOST_ROOT=$PWD/../boost ..
   - cmake --build .
