@@ -34,12 +34,20 @@ int main(int argc, char **argv)
     stream<int> minus_delta = minus->sClicked.map([](const unit& u) { return -1; });
     stream<int> delta = plus_delta.or_else(minus_delta);
 
-    // Circular dependency on declaration, use a "loop" to defer initializing the cell
-    cell_loop<int> value;
-    stream<int> update = delta.snapshot(value, [](int d, int v) { return d + v; });
-    value.loop(update.hold(0));
+    // SLineEdit takes an optional stream of strings to update its value programmatically
+    // In this case the stream is dependent on the stream defined subsequently, so we use
+    // a stream_loop.
+    stream_loop<int> set_value;
+    SLineEdit* l1 = new SLineEdit(set_value.map([](int i) { return QString::number(i); }), "0");
 
-    SLabel* l1 = new SLabel(value.map([](int i) { return QString::number(i); }));
+    // We convert the SLineEdit string to an integer
+    cell<int> value = l1->edit_cell.map([](const QString& s) { return s.toInt(); });
+
+    // And add the delta to it in case of a + or - event
+    stream<int> update = delta.snapshot(value, [](int d, int v) { return d + v; });
+
+    // And initialize the stream provided to SLineEdit with that new value
+    set_value.loop(update);
 
     ///////////////////////////////////////////////////////////////////////
 
