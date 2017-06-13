@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     // Sodium Setup
 
     SLineEdit* e1 = new SLineEdit();
-    cell<QString> reversed = e1->edit_cell.map([](const QString& s) { return reverse(s); });
+    cell<QString> reversed = e1->edits.map([](const QString& s) { return reverse(s); });
     SLabel* l1 = new SLabel(reversed);
 
     ///////////////////////////////////////////////////////////////////////

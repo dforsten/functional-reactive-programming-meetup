@@ -11,9 +11,9 @@ namespace sodium
     public:
         explicit SButton(const QString &text, QWidget *parent = Q_NULLPTR);
 
-        stream_sink<unit> sClicked;
+        stream_sink<unit> clicks;
 
-        public slots:
+    public slots:
         void on_clicked();
     };
 }

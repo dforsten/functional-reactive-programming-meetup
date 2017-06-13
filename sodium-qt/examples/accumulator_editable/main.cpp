@@ -30,8 +30,8 @@ int main(int argc, char **argv)
     SButton* plus = new SButton("+");
     SButton* minus = new SButton("-");
 
-    stream<int> plus_delta = plus->sClicked.map([](const unit& u) { return 1; });
-    stream<int> minus_delta = minus->sClicked.map([](const unit& u) { return -1; });
+    stream<int> plus_delta = plus->clicks.map([](const unit& u) { return 1; });
+    stream<int> minus_delta = minus->clicks.map([](const unit& u) { return -1; });
     stream<int> delta = plus_delta.or_else(minus_delta);
 
     // SLineEdit takes an optional stream of strings to update its value programmatically
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     SLineEdit* l1 = new SLineEdit(set_value.map([](int i) { return QString::number(i); }), "0");
 
     // We convert the SLineEdit string to an integer
-    cell<int> value = l1->edit_cell.map([](const QString& s) { return s.toInt(); });
+    cell<int> value = l1->edits.map([](const QString& s) { return s.toInt(); });
 
     // And add the delta to it in case of a + or - event
     stream<int> update = delta.snapshot(value, [](int d, int v) { return d + v; });

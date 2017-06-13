@@ -30,8 +30,8 @@ int main(int argc, char **argv)
     SButton* plus = new SButton("+");
     SButton* minus = new SButton("-");
 
-    stream<int> plus_delta = plus->sClicked.map([](const unit& u) { return 1; });
-    stream<int> minus_delta = minus->sClicked.map([](const unit& u) { return -1; });
+    stream<int> plus_delta = plus->clicks.map([](const unit& u) { return 1; });
+    stream<int> minus_delta = minus->clicks.map([](const unit& u) { return -1; });
     stream<int> delta = plus_delta.or_else(minus_delta);
 
     // Circular dependency on declaration, use a "loop" to defer initializing the cell

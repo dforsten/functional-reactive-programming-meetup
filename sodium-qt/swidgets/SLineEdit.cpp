@@ -2,23 +2,23 @@
 
 using namespace sodium;
 
-SLineEdit::SLineEdit(const QString& s, QWidget * parent) : QLineEdit(s, parent),
-    edit_cell(s)
+SLineEdit::SLineEdit(const QString& initial_value, QWidget * parent) : QLineEdit(initial_value, parent),
+    edits(initial_value)
 {
-    edit_cell = sUserChanges.hold(s);
+    edits = user_changes.hold(initial_value);
     connect(this, &QLineEdit::textEdited, this, &SLineEdit::on_edited);
 }
 
-SLineEdit::SLineEdit(stream<QString> sText, const QString& s, QWidget * parent) : QLineEdit(s, parent),
-    edit_cell(s)
+SLineEdit::SLineEdit(stream<QString> stream_in, const QString& initial_value, QWidget * parent) : QLineEdit(initial_value, parent),
+    edits(initial_value)
 {
-    sText.listen([this](const QString& s) { this->setText(s); });
-    edit_cell = sUserChanges.or_else(sText).hold(s);
+    stream_in.listen([this](const QString& new_value) { this->setText(new_value); });
+    edits = user_changes.or_else(stream_in).hold(initial_value);
 
     connect(this, &QLineEdit::textEdited, this, &SLineEdit::on_edited);
 }
 
-void SLineEdit::on_edited(const QString& t)
+void SLineEdit::on_edited(const QString& new_value)
 {
-    sUserChanges.send(t);
+    user_changes.send(new_value);
 }

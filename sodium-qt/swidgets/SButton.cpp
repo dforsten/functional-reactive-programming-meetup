@@ -9,6 +9,6 @@ SButton::SButton(const QString & text, QWidget * parent) : QPushButton(text, par
 
 void SButton::on_clicked()
 {
-    sClicked.send(unit());
+    clicks.send(unit());
 }
 
