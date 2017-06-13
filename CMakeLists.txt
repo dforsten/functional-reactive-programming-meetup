@@ -8,4 +8,5 @@ add_subdirectory(sodium ${CMAKE_BINARY_DIR}_sodium)
 
 include(sodium-qt/examples/simple_hold/simple_hold.cmake)
 include(sodium-qt/examples/reverse/reverse.cmake)
+include(sodium-qt/examples/accumulator/accumulator.cmake)
 
