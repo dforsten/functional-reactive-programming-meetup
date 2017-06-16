@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.6)
+cmake_minimum_required (VERSION 3.5.1)
 project (sodium-cxx-examples)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
