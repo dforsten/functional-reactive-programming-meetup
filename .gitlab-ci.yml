@@ -13,7 +13,7 @@ test_linux:
     - cd boost
     - git submodule update --init --recursive
     - ./bootstrap.sh
-    - ./b2 address-model=64
+    - ./b2 -j4 address-model=64
     - cd ..
     - mkdir build
     - cd build
@@ -31,7 +31,7 @@ test_macos:
     - git submodule update --init --recursive
     - cd boost
     - ./bootstrap.sh
-    - ./b2 address-model=64
+    - ./b2 -j4 address-model=64
     - cd ..
     - mkdir build
     - cd build
