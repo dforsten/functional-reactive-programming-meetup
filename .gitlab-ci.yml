@@ -6,6 +6,7 @@ cache:
 
 test:
   script:
+  - apt-get install git
   - git submodule update --init --recursive
   - cd boost
   - ./bootstrap.sh
