@@ -24,7 +24,7 @@ test_linux:
     - cmake -DBOOST_ROOT=$PWD/../boost ..
     - cmake --build .
 
-test_linux:
+test_macos:
   tags:
     - macos
   script:
