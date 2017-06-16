@@ -1,8 +1,6 @@
 test:
   script:
-  # Todo: Figure out how to run these commands without SSL errors in the Runner
-  #- git submodule update --init --recursive
-  #- mkdir build
+  - git submodule update --init --recursive
   - cd boost
   - ./bootstrap.sh
   - ./b2 address-model=64

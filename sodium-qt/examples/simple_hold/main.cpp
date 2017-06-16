@@ -17,8 +17,8 @@ int main(int argc, char **argv)
     ///////////////////////////////////////////////////////////////////////
     // Sodium Setup
 
-    SButton *b1 = new SButton("A");
-    cell<QString> mapped_button = b1->clicks.map([](const unit& u) { return QString("Test"); }).hold("A");
+    SButton *b1 = new SButton("Click Me");
+    cell<QString> mapped_button = b1->clicks.map([](const unit& u) { return QString("Hello Sodium!"); }).hold("Initial Value");
     SLabel* l1 = new SLabel(mapped_button);
 
     ///////////////////////////////////////////////////////////////////////
