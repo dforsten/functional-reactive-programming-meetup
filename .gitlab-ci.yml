@@ -9,7 +9,7 @@ test_linux:
     - linux
   script:
     - apt-get update
-    - apt-get install -y git qt5-default build-essential
+    - apt-get install -y git qt5-default build-essential cmake
     - cd boost
     - git submodule update --init --recursive
     - ./bootstrap.sh
