@@ -1,4 +1,4 @@
-image: ubuntu:xenial
+image: docker.david-forstenlechner.com/gitrunner_cpp
 
 cache:
   paths:
@@ -41,4 +41,3 @@ test_macos:
     # cmake -DBOOST_ROOT=$PWD/../boost -DCMAKE_PREFIX_PATH=/Users/davidf/Qt/5.9/clang_64 -G "Xcode" .. 
     - cmake -DBOOST_ROOT=$PWD/../boost -DCMAKE_PREFIX_PATH=/Users/davidf/Qt/5.9/clang_64 ..
     - cmake --build .
-
