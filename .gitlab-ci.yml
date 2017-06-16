@@ -2,23 +2,25 @@ image: ubuntu:xenial
 
 cache:
   paths:
-  - boost/
+    - boost/
 
 test:
+  tags:
+    - linux
   script:
-  - apt-get update
-  - apt-get install -y git
-  - git submodule update --init --recursive
-  - cd boost
-  - ./bootstrap.sh
-  - ./b2 address-model=64
-  - cd ..
-  - mkdir build
-  - cd build
-  # Windows Visual Studio 2017:
-  # cmake -DBOOST_ROOT=%CD%/../boost -DCMAKE_PREFIX_PATH=Q:\qt_official\5.9\msvc2017_64 -G "Visual Studio 15 2017 Win64" ..  
-  # MacOS XCode:
-  # cmake -DBOOST_ROOT=$PWD/../boost -DCMAKE_PREFIX_PATH=/Users/davidf/Qt/5.9/clang_64 -G "Xcode" .. 
-  - cmake -DBOOST_ROOT=$PWD/../boost -DCMAKE_PREFIX_PATH=/Users/davidf/Qt/5.9/clang_64 ..
-  - cmake --build .
+    - apt-get update
+    - apt-get install -y git
+    - git submodule update --init --recursive
+    - cd boost
+    - ./bootstrap.sh
+    - ./b2 address-model=64
+    - cd ..
+    - mkdir build
+    - cd build
+    # Windows Visual Studio 2017:
+    # cmake -DBOOST_ROOT=%CD%/../boost -DCMAKE_PREFIX_PATH=Q:\qt_official\5.9\msvc2017_64 -G "Visual Studio 15 2017 Win64" ..  
+    # MacOS XCode:
+    # cmake -DBOOST_ROOT=$PWD/../boost -DCMAKE_PREFIX_PATH=/Users/davidf/Qt/5.9/clang_64 -G "Xcode" .. 
+    - cmake -DBOOST_ROOT=$PWD/../boost -DCMAKE_PREFIX_PATH=/Users/davidf/Qt/5.9/clang_64 ..
+    - cmake --build .
 
