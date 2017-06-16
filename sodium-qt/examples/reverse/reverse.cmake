@@ -14,6 +14,7 @@ file(GLOB common_SRC
 )
 
 add_executable(reverse ${reverse_SRC} ${swidgets_SRC} ${common_SRC})
+target_compile_features(reverse PUBLIC cxx_constexpr)
 
 include_directories(sodium boost sodium-qt/swidgets sodium-qt/examples/common)
 
